@@ -90,12 +90,7 @@ fn main() -> ! {
 
     let mut lcd = SSD18030::new_i2c(i2c, 0x3D, &mut timer);
 
-    let mut config = Config::default();
-    config.bw_inversion = true;
-    config.four_line_enabled = false;
-    config.double_height = Some(DoubleHeight::Lines3Middle);
-    config.display_settings =
-        DisplaySettings::new(LineDisplayMode::OneOrThreeLines, true, true, false);
+    let config = Config::default();
 
     let _ = lcd.init(config).unwrap();
 
