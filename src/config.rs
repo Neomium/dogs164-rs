@@ -32,7 +32,7 @@ impl Default for Config {
     fn default() -> Self {
         Config {
             four_line_enabled: true,
-            bw_inversion: false,
+            bw_inversion: true,
             font_width: FontWidth::FiveDot,
             display_control: DisplayConfig::DISPLAY_ON,
             entry_mode: EntryModeSettings::new(HorizontalDir::LeftToRight, false),
