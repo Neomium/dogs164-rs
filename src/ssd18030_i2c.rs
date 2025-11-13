@@ -63,10 +63,10 @@ pub trait Lcd {
     fn clear_chars(&mut self, row_col: (u8, u8), chars: u8) -> Result<(), Self::Error>;
 }
 
-pub struct SSD18030<'a, B: I2c, D: DelayNs> {
+pub struct SSD18030< B: I2c, D: DelayNs> {
     i2c: B,
 
-    delay: &'a mut D,
+    delay: D,
 
     address: u8,
 
@@ -75,8 +75,8 @@ pub struct SSD18030<'a, B: I2c, D: DelayNs> {
     config: Config,
 }
 
-impl<'a, B: I2c, D: DelayNs> SSD18030<'a, B, D> {
-    pub fn new_i2c(i2c: B, address: u8, delay: &'a mut D) -> Self {
+impl<B: I2c, D: DelayNs> SSD18030<B, D> {
+    pub fn new_i2c(i2c: B, address: u8, delay: D) -> Self {
         SSD18030 {
             i2c,
             delay,
@@ -168,7 +168,7 @@ impl<'a, B: I2c, D: DelayNs> SSD18030<'a, B, D> {
     }
 }
 
-impl<B: I2c, D: DelayNs> Lcd for SSD18030<'_, B, D> {
+impl<B: I2c, D: DelayNs> Lcd for SSD18030<B, D> {
     type Error = LcdError<B::Error>;
 
     fn init(&mut self, config: Config) -> Result<(), Self::Error> {
