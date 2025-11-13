@@ -1,0 +1,11 @@
+/home/hussein/Neomium/dogs164-rs/example/target/release/deps/thiserror-3bf35cf279b9de34.d: /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/lib.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/aserror.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/display.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/provide.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/var.rs
+
+/home/hussein/Neomium/dogs164-rs/example/target/release/deps/libthiserror-3bf35cf279b9de34.rlib: /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/lib.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/aserror.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/display.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/provide.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/var.rs
+
+/home/hussein/Neomium/dogs164-rs/example/target/release/deps/libthiserror-3bf35cf279b9de34.rmeta: /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/lib.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/aserror.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/display.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/provide.rs /home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/var.rs
+
+/home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/lib.rs:
+/home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/aserror.rs:
+/home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/display.rs:
+/home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/provide.rs:
+/home/hussein/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.16/src/var.rs:

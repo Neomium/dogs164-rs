@@ -1,0 +1,9 @@
+{
+    "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.check.command": "clippy",
+    "rust-analyzer.checkOnSave": true,
+    "rust-analyzer.hover.actions.enable": true,
+    "rust-analyzer.diagnostics.enable": true,
+    "rust-analyzer.hover.actions.gotoTypeDef.enable": true,
+    "rust-analyzer.hover.actions.references.enable": true,
+}

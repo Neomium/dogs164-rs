@@ -1,0 +1,1 @@
+rp_pico::rp2040_hal::I2C<I2C0, (rp_pico::rp2040_hal::gpio::Pin<Gpio20, FunctionI2c, PullNone>, rp_pico::rp2040_hal::gpio::Pin<Gpio21, FunctionI2c, PullNone>)>

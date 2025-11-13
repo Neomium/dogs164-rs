@@ -1,0 +1,9 @@
+[package]
+name = "dogs164-rs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bitflags = "2.9.4"
+embedded-hal = "1.0.0"
+heapless = "0.9.1"
