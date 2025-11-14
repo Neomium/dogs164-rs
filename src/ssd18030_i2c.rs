@@ -1,9 +1,9 @@
 use crate::commands::{
     CMD_8BIT_4LINES_RE0_IS0, CMD_8BIT_4LINES_RE0_IS1, CMD_8BIT_4LINES_RE1_IS0, CMD_BS0_1,
     CMD_BS1_1, CMD_CLEAR_DISPLAY, CMD_CONTRAST_DEFAULT_DOGS164, CMD_DISPLAY,
-    CMD_FOLLOWER_CONTROL_DOGS164, CMD_POWER_CONTROL_DOGS164, CMD_RETURN_HOME, COMMAND_2LINES,
-    COMMAND_3LINES_BOTTOM, COMMAND_3LINES_MIDDLE, COMMAND_3LINES_TOP, DisplayConfig,
-    EntryModeSettings, ExtendedFunctionSet, MODE_COMMAND, MODE_DATA,
+    CMD_FOLLOWER_CONTROL_DOGS164, CMD_POWER_CONTROL_DOGS164, CMD_RETURN_HOME, CMD_ROM_SELECT,
+    COMMAND_2LINES, COMMAND_3LINES_BOTTOM, COMMAND_3LINES_MIDDLE, COMMAND_3LINES_TOP,
+    DisplayConfig, EntryModeSettings, ExtendedFunctionSet, MODE_COMMAND, MODE_DATA,
 };
 use crate::commands::{DoubleHeight, ViewMode};
 use crate::config::Config;
@@ -61,9 +61,11 @@ pub trait Lcd {
     fn clear_line(&mut self, line: u8) -> Result<(), Self::Error>;
 
     fn clear_chars(&mut self, row_col: (u8, u8), chars: u8) -> Result<(), Self::Error>;
+
+    fn write_special_char(&mut self, code: u8) -> Result<(), Self::Error>;
 }
 
-pub struct SSD18030< B: I2c, D: DelayNs> {
+pub struct SSD18030<B: I2c, D: DelayNs> {
     i2c: B,
 
     delay: D,
@@ -144,6 +146,14 @@ impl<B: I2c, D: DelayNs> SSD18030<B, D> {
         Ok(())
     }
 
+    fn select_romA(&mut self) -> Result<(), B::Error> {
+        self.send_command(self.config.display_settings.cmd_re1_is0())?;
+        self.send_command(CMD_ROM_SELECT)?; // Set ROM to ROM A
+        self.send_data_byte(0x00)?; // ROM A
+        self.finish_cmd()?;
+        Ok(())
+    }
+
     pub fn setup(&mut self) -> Result<(), B::Error> {
         self.send_command(CMD_8BIT_4LINES_RE0_IS0)?;
         self.send_command(0x06)?;
@@ -201,6 +211,9 @@ impl<B: I2c, D: DelayNs> Lcd for SSD18030<B, D> {
 
         self.delay.delay_ms(100);
         self.set_display(config.display_control)?;
+
+        self.delay.delay_ms(100);
+        self.select_romA()?;
 
         self.delay.delay_ms(100);
         self.locate(1, 1)?;
@@ -336,6 +349,11 @@ impl<B: I2c, D: DelayNs> Lcd for SSD18030<B, D> {
         }
 
         self.locate(row, col)?;
+        Ok(())
+    }
+
+    fn write_special_char(&mut self, code: u8) -> Result<(), LcdError<B::Error>> {
+        self.send_data_byte(code)?;
         Ok(())
     }
 }
