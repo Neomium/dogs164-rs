@@ -95,12 +95,25 @@ fn main() -> ! {
 
     let _ = lcd.init(config);
 
+    let o_symbol = [
+        0b11100, // top line
+        0b10100, // second
+        0b11100, // third
+        0b00000, // fourth
+        0b00000, // fifth
+        0b00000, // sixth
+        0b00000, // seventh
+        0b00000, // bottom line
+    ];
+    let _ = lcd.create_custom_char(0x0, &o_symbol);
+
     let _ = lcd.locate(1, 1);
     alarm0.schedule(2.secs()).unwrap();
     while !alarm0.finished() {}
 
-    let _ = lcd.write("C1: 4.12");
-    let _ = lcd.write_special_char(0xB5);
+    let _ = lcd.write("C1: 4.12 ");
+    let _ = lcd.write_special_char(0x00);
+    let _ = lcd.write("C");
     alarm0.schedule(2.secs()).unwrap();
     while !alarm0.finished() {}
 

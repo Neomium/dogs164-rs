@@ -63,6 +63,8 @@ pub trait Lcd {
     fn clear_chars(&mut self, row_col: (u8, u8), chars: u8) -> Result<(), Self::Error>;
 
     fn write_special_char(&mut self, code: u8) -> Result<(), Self::Error>;
+
+    fn create_custom_char(&mut self, location: u8, charmap: &[u8]) -> Result<(), Self::Error>;
 }
 
 pub struct SSD18030<B: I2c, D: DelayNs> {
@@ -354,6 +356,14 @@ impl<B: I2c, D: DelayNs> Lcd for SSD18030<B, D> {
 
     fn write_special_char(&mut self, code: u8) -> Result<(), LcdError<B::Error>> {
         self.send_data_byte(code)?;
+        Ok(())
+    }
+
+    fn create_custom_char(&mut self, location: u8, charmap: &[u8]) -> Result<(), Self::Error> {
+        let loc = location & 0x07; // Only 8 locations (0-7)
+        self.re0_is0_cmd()?;
+        self.send_command(0x40 | (loc << 3))?; // Set
+        self.send_data(charmap)?;
         Ok(())
     }
 }
