@@ -21,4 +21,4 @@ rustflags = [
     "-C", "no-vectorize-loops",
 ]
 
-runner = "elf2uf2-rs"
+runner = "elf2uf2-rs --deploy"

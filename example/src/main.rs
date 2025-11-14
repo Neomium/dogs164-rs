@@ -7,8 +7,8 @@ pub mod heap;
 
 use dogs164_rs::ssd18030_i2c::*;
 use fugit::{ExtU32, RateExtU32};
+use heapless::{String, format};
 
-use embedded_hal::delay::DelayNs;
 use embedded_hal::digital::OutputPin;
 use heap::Heap;
 use panic_halt as panic;
@@ -28,6 +28,7 @@ use bsp::{
         watchdog::Watchdog,
     },
 };
+use defmt::export::char;
 use defmt::timestamp;
 use dogs164_rs::commands::{
     CMD_CLEAR_DISPLAY, CMD_RETURN_HOME, DisplaySettings, DoubleHeight, LineDisplayMode, ViewMode,
@@ -92,37 +93,28 @@ fn main() -> ! {
 
     let config = Config::default();
 
-    let _ = lcd.init(config).unwrap();
+    let _ = lcd.init(config);
 
-    let _ = lcd.locate(1, 1).unwrap();
-    alarm0.schedule(2.secs()).unwrap();
-    while !alarm0.finished() {}
-
-    let _ = lcd.write("C1: 4.12V").unwrap();
+    let _ = lcd.locate(1, 1);
     alarm0.schedule(2.secs()).unwrap();
     while !alarm0.finished() {}
 
-    let _ = lcd.locate(2, 1).unwrap();
-    let _ = lcd.write("C2: 3.93V").unwrap();
+    let _ = lcd.write("C1: 4.12");
+    let _ = lcd.write_special_char(0xB5);
     alarm0.schedule(2.secs()).unwrap();
     while !alarm0.finished() {}
-    let _ = lcd.locate(3, 1).unwrap();
-    let _ = lcd.write("C3: 3.53V").unwrap();
+
+    let _ = lcd.locate(2, 1);
+    let _ = lcd.write("C2: 3.93V");
+    alarm0.schedule(2.secs()).unwrap();
+    while !alarm0.finished() {}
+    let _ = lcd.locate(3, 1);
+    let _ = lcd.write("C3: 3.53V");
 
     alarm0.schedule(2.secs()).unwrap();
     while !alarm0.finished() {}
 
-    while !alarm0.finished() {}
-    lcd.clear_line(2).unwrap();
-    alarm0.schedule(2.secs()).unwrap();
-    while !alarm0.finished() {}
-    lcd.clear_line(3).unwrap();
-    alarm0.schedule(2.secs()).unwrap();
-    while !alarm0.finished() {}
-    lcd.clear_chars((1, 5), 4).unwrap();
-    alarm0.schedule(2.secs()).unwrap();
-    while !alarm0.finished() {}
-    lcd.write("1.32").unwrap();
+    let _ = lcd.locate(2, 1);
 
     let mut led_pin = pins.led.into_push_pull_output();
     led_pin.set_high().unwrap();

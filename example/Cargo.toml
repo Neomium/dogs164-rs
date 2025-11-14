@@ -23,3 +23,4 @@ dogs164-rs ={path = "..",version = "*"}
 
 # Panic handler
 panic-halt = "1.0.0"
+heapless = "0.9.1"
